@@ -6,24 +6,12 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 06:04:23 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/15 06:25:33 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/16 21:05:09 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
- * color.c
- * Simple palette functions: convert iteration counts to RGB colors.
- */
-
 #include "fractal.h"
 
-/*
- * color_map:
- * - i: current iteration count
- * - max_iter: maximum iterations
- * Returns an 0xRRGGBB color. If the point did not escape (i == max_iter)
- * returns black. Otherwise computes a smooth palette based on `i`.
- */
 static int	palette1(double t)
 {
 	int	r;

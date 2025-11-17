@@ -6,16 +6,9 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 06:03:40 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/15 06:09:38 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/16 21:04:40 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-** EPITECH PROJECT, 2025
-** Fractol
-** File description:
-** Keyboard event handler
-*/
 
 #include "fractal.h"
 #include <stdlib.h>

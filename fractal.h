@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 06:27:48 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/15 06:49:22 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/16 19:26:16 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ double	map_range(double value, t_range in, t_range out);
 void	init_fractal(t_fractal *f, int ac, char **av);
 int		key_hook(int keycode, void *param);
 int		mouse_hook(int button, int x, int y, void *param);
+int		motion_hook(int x, int y, void *param);
 int		close_window(void *param);
 int		color_map(int i, int max_iter, int palette);
 

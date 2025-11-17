@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 06:03:34 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/15 06:52:01 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/16 19:26:16 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int ac, char **av)
 	draw_fractal(&f);
 	mlx_key_hook(f.win, key_hook, &f);
 	mlx_mouse_hook(f.win, mouse_hook, &f);
+	mlx_hook(f.win, 6, 1L << 6, motion_hook, &f);
 	mlx_hook(f.win, 17, 0, close_window, &f);
 	mlx_loop(f.mlx);
 }

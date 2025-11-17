@@ -6,16 +6,9 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 06:03:30 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/15 06:54:00 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/16 21:05:37 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-** EPITECH PROJECT, 2025
-** Fractol
-** File description:
-** Render functions
-*/
 
 #include "fractal.h"
 
@@ -58,6 +51,7 @@ void	render_fractal(t_fractal *f)
 	}
 	mlx_put_image_to_window(f->mlx, f->win, f->img.ptr, 0, 0);
 }
+
 void	draw_fractal(t_fractal *f)
 {
 	render_fractal(f);

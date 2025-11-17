@@ -6,16 +6,9 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 06:04:01 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/15 06:43:26 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/16 21:04:27 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-** EPITECH PROJECT, 2025
-** Fractol
-** File description:
-** Initialization functions
-*/
 
 #include "fractal.h"
 #include <string.h>
