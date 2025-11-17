@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 06:03:53 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/17 03:35:42 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/17 07:01:02 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,4 @@ int	iterate_julia(t_complex z, t_complex c, int max_iter)
 	}
 	return (i);
 }
-/* iterate_burning moved to iteration_bonus.c */
-
+/* iterate_burning implemented in bonus/iteration_bonus.c */

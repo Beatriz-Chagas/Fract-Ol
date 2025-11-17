@@ -6,113 +6,112 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 03:16:10 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/17 03:39:14 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/17 07:31:50 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractal.h"
+
 /*
- * ft_atof_skip
- * ----------
- * Salta espaços iniciais e extrai o sinal (+/-) da string.
- * Retorna um ponteiro para o primeiro caractere após o sinal,
- * e armazena o valor do sinal (1.0 ou -1.0) em *sign.
+ * Implementação em 5 funções pequenas (4 estáticas + ft_atof).
+ * Não usa struct nem funções externas.
  */
-const char	*ft_atof_skip(const char *s, double *sign)
+/*
+ * New implementation: apenas DUAS funções neste arquivo.
+ * - ft_atof_helper (static): faz o parsing, avança o ponteiro e retorna 0/-1.
+ * - ft_atof (pública): valida argumentos e chama o helper.
+ */
+
+/*
+ * ft_skip_ws
+ *	Pula espaços em branco e retorna ponteiro avançado.
+ */
+static const char	*ft_skip_ws(const char *s)
 {
-	while (*s == ' ' || (*s >= 9 && *s <= 13))
+	while (*s && (*s == ' ' || *s == '\t' || *s == '\n' || *s == '\r'
+			|| *s == '\f' || *s == '\v'))
 		s++;
-	*sign = 1.0;
-	if (*s == '-' || *s == '+')
-	{
-		if (*s == '-')
-			*sign = -1.0;
-		s++;
-	}
 	return (s);
 }
 
 /*
- * ft_atof_parse_integer
- * ----------
- * Converte a parte inteira de uma string. Atualiza st->result e st->p.
- * Retorna 1 se encontrou pelo menos um dígito, 0 caso contrário.
+ * ft_extract_sign
+ *	Retorna 1.0 ou -1.0 e avança o ponteiro quando houver '+'/'-'.
  */
-int	ft_atof_parse_integer(t_atof_state *st)
+static double	ft_extract_sign(const char **ps)
 {
-	int	has_digits;
+	double	sign;
 
-	has_digits = 0;
-	while (*st->p >= '0' && *st->p <= '9')
+	sign = 1.0;
+	if (**ps == '+' || **ps == '-')
 	{
-		st->result = st->result * 10.0 + (*st->p - '0');
-		has_digits = 1;
-		st->p++;
+		if (**ps == '-')
+			sign = -1.0;
+		(*ps)++;
 	}
-	return (has_digits);
-}
-
-// ft_atof_parse_fraction
-// Converte a parte fracionária de uma string (após o ponto).
-// Retorna 1 se encontrou dígitos fracionários, 0 caso contrário.
-int	ft_atof_parse_fraction(t_atof_state *st)
-{
-	int	has_digits;
-
-	has_digits = 0;
-	if (*st->p == '.')
-		st->p++;
-	while (*st->p >= '0' && *st->p <= '9')
-	{
-		st->result += (*st->p - '0') * st->decimal_place;
-		st->decimal_place *= 0.1;
-		has_digits = 1;
-		st->p++;
-	}
-	return (has_digits);
+	return (sign);
 }
 
 /*
- ft_atof_parse_number
- Wrapper que usa ft_atof_parse_integer e ft_atof_parse_fraction.
- Retorna 0 em sucesso (com resultado em *out).
+ * ft_parse_integer
+ *	Acumula dígitos inteiros em *res e avança *ps; retorna 1 se encontrou dígitos.
  */
-int	ft_atof_parse_number(const char *s, double *out)
+static int	ft_parse_integer(const char **ps, double *res)
 {
-	t_atof_state	st;
-	int				int_digits;
-	int				frac_digits;
+	int	found;
 
-	if (!s || !out)
-		return (-1);
-	st.p = s;
-	st.result = 0.0;
-	st.sign = 1.0;
-	st.decimal_place = 0.1;
-	int_digits = ft_atof_parse_integer(&st);
-	frac_digits = ft_atof_parse_fraction(&st);
-	if (!int_digits && !frac_digits)
-		return (-1);
-	*out = st.result;
-	return (0);
+	found = 0;
+	while (**ps >= '0' && **ps <= '9')
+	{
+		*res = *res * 10.0 + (**ps - '0');
+		found = 1;
+		(*ps)++;
+	}
+	return (found);
+}
+
+/*
+ * ft_parse_fraction
+ *	Lê parte fracionária após '.' e acumula em *res; retorna 1 se houve dígitos.
+ */
+static int	ft_parse_fraction(const char **ps, double *res)
+{
+	double	place;
+
+	if (**ps != '.')
+		return (0);
+	(*ps)++;
+	place = 0.1;
+	while (**ps >= '0' && **ps <= '9')
+	{
+		*res += (**ps - '0') * place;
+		place *= 0.1;
+		(*ps)++;
+	}
+	return (1);
 }
 
 /*
  * ft_atof
- * ----------
- * Wrapper que usa ft_atof_skip e ft_atof_parse_number.
- * Converte string para double com verificação de erro.
+ *	Valida parâmetros, usa helpers e preenche *out com o valor convertido.
  */
 int	ft_atof(const char *s, double *out)
 {
-	double	sign;
-	double	num;
+	const char	*p;
+	double		val;
+	double		sign;
+	int			has_int;
+	int			has_frac;
 
 	if (!s || !out)
 		return (-1);
-	s = ft_atof_skip(s, &sign);
-	if (ft_atof_parse_number(s, &num) != 0)
+	p = ft_skip_ws(s);
+	sign = ft_extract_sign(&p);
+	val = 0.0;
+	has_int = ft_parse_integer(&p, &val);
+	has_frac = ft_parse_fraction(&p, &val);
+	if (!has_int && !has_frac)
 		return (-1);
-	*out = sign * num;
+	*out = sign * val;
 	return (0);
 }

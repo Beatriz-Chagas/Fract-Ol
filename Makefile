@@ -6,17 +6,26 @@
 #    By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 06:03:46 by bchagas-          #+#    #+#              #
-#    Updated: 2025/11/17 03:39:13 by bchagas-         ###   ########.fr        #
+#    Updated: 2025/11/17 04:08:16 by bchagas-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I include
 MLXFLAGS = -lmlx -lXext -lX11 -lm
 
-SRC = main.c render.c iteration.c utils.c init.c hooks.c keys.c color.c \
-	hooks_bonus.c keys_bonus.c iteration_bonus.c ft_atof.c
+SRC = \
+	src/main.c \
+	src/render.c \
+	src/iteration.c \
+	src/utils.c \
+	 src/init.c \
+	src/color.c \
+	src/ft_atof.c \
+	bonus/hooks_bonus.c \
+	bonus/keys_bonus.c \
+	bonus/iteration_bonus.c
 OBJ = $(SRC:.c=.o)
 
 $(NAME): $(OBJ)

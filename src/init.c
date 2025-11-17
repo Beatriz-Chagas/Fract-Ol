@@ -6,29 +6,23 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 06:04:01 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/17 03:39:13 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/17 06:38:33 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractal.h"
 #include <string.h>
 
-/*
- * init_fractal
- * ----------
- * Inicializa a estrutura `t_fractal` com valores padrão e configura a
- * janela/porta de imagem do MLX. Também interpreta argumentos da linha
- * de comando para selecionar o tipo de fractal (por exemplo, "julia")
- * e, opcionalmente, os valores reais/imag do parâmetro c para Julia.
- * Parâmetros:
- *  - f: ponteiro para a estrutura que será inicializada.
- *  - ac, av: argumentos da linha de comando (usados para escolher fractal
- *            e parâmetros de Julia se fornecidos).
- * Comportamento:
- *  - Define zoom, offsets, iterações, paleta e parâmetros de Julia.
- *  - Cria a janela e a imagem usando a biblioteca MiniLibX.
- */
+static void	init_mlx_and_image(t_fractal *f);
+static void	parse_cli_fractal_args(t_fractal *f, int ac, char **av);
+
 void	init_fractal(t_fractal *f, int ac, char **av)
+{
+	init_mlx_and_image(f);
+	parse_cli_fractal_args(f, ac, av);
+}
+
+static void	init_mlx_and_image(t_fractal *f)
 {
 	f->mlx = mlx_init();
 	f->win = mlx_new_window(f->mlx, WIDTH, HEIGHT, "Fractol");
@@ -43,10 +37,14 @@ void	init_fractal(t_fractal *f, int ac, char **av)
 	f->julia_c.real = 0.0;
 	f->julia_c.imag = 0.0;
 	f->fractal_type = FRACT_MANDEL;
-	if (ac >= 2 && ft_strcmp (av[1], "julia") == 0)
-	{
-		double tmp;
+}
 
+static void	parse_cli_fractal_args(t_fractal *f, int ac, char **av)
+{
+	double	tmp;
+
+	if (ac >= 2 && ft_strcmp(av[1], "julia") == 0)
+	{
 		f->fractal_type = FRACT_JULIA;
 		if (ac == 4)
 		{
@@ -56,7 +54,13 @@ void	init_fractal(t_fractal *f, int ac, char **av)
 				f->julia_c.imag = tmp;
 		}
 	}
-	else if (ac >= 2 && (strcmp(av[1], "burning") == 0
-			|| strcmp(av[1], "burningship") == 0))
+	else if (ac >= 2 && (strcmp(av[1], "burningship") == 0))
 		f->fractal_type = FRACT_BURNING;
+}
+
+int	close_window(void *param)
+{
+	(void)param;
+	exit(0);
+	return (0);
 }
