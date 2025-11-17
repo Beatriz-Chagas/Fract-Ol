@@ -6,7 +6,7 @@
 #    By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 06:03:46 by bchagas-          #+#    #+#              #
-#    Updated: 2025/11/15 06:55:34 by bchagas-         ###   ########.fr        #
+#    Updated: 2025/11/17 03:39:13 by bchagas-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 MLXFLAGS = -lmlx -lXext -lX11 -lm
 
-SRC = main.c render.c iteration.c utils.c init.c hooks.c keys.c color.c
+SRC = main.c render.c iteration.c utils.c init.c hooks.c keys.c color.c \
+	hooks_bonus.c keys_bonus.c iteration_bonus.c ft_atof.c
 OBJ = $(SRC:.c=.o)
 
 $(NAME): $(OBJ)

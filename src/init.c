@@ -6,13 +6,28 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 06:04:01 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/16 21:04:27 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/17 03:39:13 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractal.h"
 #include <string.h>
 
+/*
+ * init_fractal
+ * ----------
+ * Inicializa a estrutura `t_fractal` com valores padrão e configura a
+ * janela/porta de imagem do MLX. Também interpreta argumentos da linha
+ * de comando para selecionar o tipo de fractal (por exemplo, "julia")
+ * e, opcionalmente, os valores reais/imag do parâmetro c para Julia.
+ * Parâmetros:
+ *  - f: ponteiro para a estrutura que será inicializada.
+ *  - ac, av: argumentos da linha de comando (usados para escolher fractal
+ *            e parâmetros de Julia se fornecidos).
+ * Comportamento:
+ *  - Define zoom, offsets, iterações, paleta e parâmetros de Julia.
+ *  - Cria a janela e a imagem usando a biblioteca MiniLibX.
+ */
 void	init_fractal(t_fractal *f, int ac, char **av)
 {
 	f->mlx = mlx_init();
@@ -28,16 +43,20 @@ void	init_fractal(t_fractal *f, int ac, char **av)
 	f->julia_c.real = 0.0;
 	f->julia_c.imag = 0.0;
 	f->fractal_type = FRACT_MANDEL;
-	if (ac >= 2 && strcmp(av[1], "julia") == 0)
+	if (ac >= 2 && ft_strcmp (av[1], "julia") == 0)
 	{
+		double tmp;
+
 		f->fractal_type = FRACT_JULIA;
 		if (ac == 4)
 		{
-			f->julia_c.real = atof(av[2]);
-			f->julia_c.imag = atof(av[3]);
+			if (ft_atof(av[2], &tmp) == 0)
+				f->julia_c.real = tmp;
+			if (ft_atof(av[3], &tmp) == 0)
+				f->julia_c.imag = tmp;
 		}
 	}
 	else if (ac >= 2 && (strcmp(av[1], "burning") == 0
-			|| strcmp(av[1], "burningship") == 0 || strcmp(av[1], "ship") == 0))
+			|| strcmp(av[1], "burningship") == 0))
 		f->fractal_type = FRACT_BURNING;
 }

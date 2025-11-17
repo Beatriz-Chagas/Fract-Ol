@@ -6,12 +6,18 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 07:00:00 by auto-refact       #+#    #+#             */
-/*   Updated: 2025/11/16 21:00:03 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/17 03:09:22 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractal.h"
 
+/*
+ * pixel_put
+ * ----------
+ * Escreve um pixel na imagem `img` no ponto (x, y) com a cor dada.
+ * Protege contra coordenadas fora da tela.
+ */
 void	pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
@@ -22,15 +28,46 @@ void	pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = (unsigned int)color;
 }
 
+/*
+ * map
+ * ----------
+ * Converte uma coordenada de pixel (valor) para a coordenada correspondente
+ * no plano complexo.
+ */
 double	map(double value, double max_val, double offset)
 {
 	return (offset + (value / max_val - 0.5) * 4.0);
 }
 
+/*
+ * map_range
+ * ----------
+ * Mapeia um valor de um intervalo `in` para um intervalo `out`.
+ */
 double	map_range(double value, t_range in, t_range out)
 {
 	if (in.max - in.min == 0)
 		return (out.min);
 	return (out.min + (value - in.min) * (out.max - out.min)
 		/ (in.max - in.min));
+}
+
+/*
+ * ft_strcmp
+ * ----------
+ * Compara duas strings. Retorna 0 se iguais, valor negativo ou positivo
+ * conforme a ordem lexicográfica.
+ */
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	while ((s1[i] || s2[i]))
+	{
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return (0);
 }

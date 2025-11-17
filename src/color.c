@@ -6,12 +6,24 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 06:04:23 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/16 21:05:09 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/16 22:57:54 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractal.h"
 
+/*
+ * palette1
+ * ----------
+ * Gera uma cor baseada em uma interpolação polinomial suave.
+ * Parâmetros:
+ *  - t: valor normalizado entre 0.0 e 1.0 que representa a posição
+ *       ao longo do gradiente de cores (proporção da iteração).
+ * Retorno:
+ *  - Inteiro RGB (0xRRGGBB) resultante da combinação dos canais.
+ * Observações:
+ *  - Função estática usada apenas internamente a este ficheiro.
+ */
 static int	palette1(double t)
 {
 	int	r;
@@ -30,6 +42,13 @@ static int	palette1(double t)
 	return ((r << 16) | (g << 8) | b);
 }
 
+/*
+ * palette2
+ * ----------
+ * Variante de paleta que mistura um canal vermelho decrescente com
+ * componentes verdes/azuis calculados por polinômios. Recebe o mesmo
+ * parâmetro normalizado `t` e retorna um inteiro RGB.
+ */
 static int	palette2(double t)
 {
 	int	r;
@@ -42,6 +61,13 @@ static int	palette2(double t)
 	return ((r << 16) | (g << 8) | b);
 }
 
+/*
+ * palette3
+ * ----------
+ * Paleta que usa funções seno para gerar cores cíclicas suaves no espectro.
+ * O parâmetro `t` é mapeado para um ângulo e cada canal RGB aplica um
+ * deslocamento de fase diferente, produzindo transições suaves e variadas.
+ */
 static int	palette3(double t)
 {
 	double	tt;
@@ -56,6 +82,20 @@ static int	palette3(double t)
 	return ((r << 16) | (g << 8) | b);
 }
 
+/*
+ * color_map
+ * ----------
+ * Calcula a cor de um pixel com base no número de iterações `i` e no
+ * limite `max_iter`. Se o ponto pertence ao conjunto (i >= max_iter),
+ * retorna preto. Caso contrário, normaliza `i` para [0,1] e delega para
+ * uma das paletas disponíveis.
+ * Parâmetros:
+ *  - i: número de iterações até escapar (ou valor de parada).
+ *  - max_iter: número máximo de iterações usado na geração.
+ *  - palette: índice da paleta (0..PALETTE_COUNT-1).
+ * Retorno:
+ *  - cor no formato 0xRRGGBB.
+ */
 int	color_map(int i, int max_iter, int palette)
 {
 	double	t;

@@ -6,37 +6,27 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 06:03:40 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/16 21:04:40 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/17 03:35:42 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractal.h"
 #include <stdlib.h>
 
-int	key_hook(int keycode, void *param)
-{
-	t_fractal	*f;
+/*
+ * key_hook
+ * ----------
+ * Trata eventos de teclado para controlar a visualização do fractal.
+ * Suporta:
+ *  - ESC (65307): sai do programa.
+ *  - Espaço (32): alterna entre paletas de cores.
+ *  - '+' (61) e '-' (45): aproximam/afastam o zoom.
+ *  - Setas: deslocam o centro da visualização (offsets X/Y).
+ * Parâmetros:
+ *  - keycode: código da tecla pressionada (código X11 usado pelo MLX).
+ *  - param: ponteiro para t_fractal (estado usado e atualizado).
+ * Retorno:
+ *  - retorna 0 (compatível com a assinatura exigida pelo MLX).
+ */
+/* Key handling moved to keys_bonus.c to separate bonus features */
 
-	f = (t_fractal *)param;
-	if (keycode == 65307)
-		exit(0);
-	if (keycode == 32)
-	{
-		f->palette = (f->palette + 1) % PALETTE_COUNT;
-		draw_fractal(f);
-	}
-	else if (keycode == 61)
-		f->zoom *= 0.9;
-	else if (keycode == 45)
-		f->zoom *= 1.1;
-	else if (keycode == 65361)
-		f->offset_x -= 0.4 * f->zoom;
-	else if (keycode == 65363)
-		f->offset_x += 0.4 * f->zoom;
-	else if (keycode == 65362)
-		f->offset_y -= 0.4 * f->zoom;
-	else if (keycode == 65364)
-		f->offset_y += 0.4 * f->zoom;
-	draw_fractal(f);
-	return (0);
-}
