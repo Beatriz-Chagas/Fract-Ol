@@ -12,32 +12,14 @@
 
 #include "fractal.h"
 
-/*
- * Implementação em 5 funções pequenas (4 estáticas + ft_atof).
- * Não usa struct nem funções externas.
- */
-/*
- * New implementation: apenas DUAS funções neste arquivo.
- * - ft_atof_helper (static): faz o parsing, avança o ponteiro e retorna 0/-1.
- * - ft_atof (pública): valida argumentos e chama o helper.
- */
-
-/*
- * ft_skip_ws
- *	Pula espaços em branco e retorna ponteiro avançado.
- */
 static const char	*ft_skip_ws(const char *s)
 {
-	while (*s && (*s == ' ' || *s == '\t' || *s == '\n' || *s == '\r'
-			|| *s == '\f' || *s == '\v'))
+	while (*s == ' ' || *s == '\t' || *s == '\n'
+		|| *s == '\r' || *s == '\f' || *s == '\v')
 		s++;
 	return (s);
 }
 
-/*
- * ft_extract_sign
- *	Retorna 1.0 ou -1.0 e avança o ponteiro quando houver '+'/'-'.
- */
 static double	ft_extract_sign(const char **ps)
 {
 	double	sign;
@@ -52,10 +34,6 @@ static double	ft_extract_sign(const char **ps)
 	return (sign);
 }
 
-/*
- * ft_parse_integer
- *	Acumula dígitos inteiros em *res e avança *ps; retorna 1 se encontrou dígitos.
- */
 static int	ft_parse_integer(const char **ps, double *res)
 {
 	int	found;
@@ -70,31 +48,26 @@ static int	ft_parse_integer(const char **ps, double *res)
 	return (found);
 }
 
-/*
- * ft_parse_fraction
- *	Lê parte fracionária após '.' e acumula em *res; retorna 1 se houve dígitos.
- */
 static int	ft_parse_fraction(const char **ps, double *res)
 {
 	double	place;
+	int		found;
 
 	if (**ps != '.')
 		return (0);
 	(*ps)++;
 	place = 0.1;
+	found = 0;
 	while (**ps >= '0' && **ps <= '9')
 	{
 		*res += (**ps - '0') * place;
 		place *= 0.1;
+		found = 1;
 		(*ps)++;
 	}
-	return (1);
+	return (found);
 }
 
-/*
- * ft_atof
- *	Valida parâmetros, usa helpers e preenche *out com o valor convertido.
- */
 int	ft_atof(const char *s, double *out)
 {
 	const char	*p;

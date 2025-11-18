@@ -13,22 +13,15 @@
 #include "fractal.h"
 #include <string.h>
 
-static void	init_mlx_and_image(t_fractal *f);
 static void	parse_cli_fractal_args(t_fractal *f, int ac, char **av);
 
 void	init_fractal(t_fractal *f, int ac, char **av)
-{
-	init_mlx_and_image(f);
-	parse_cli_fractal_args(f, ac, av);
-}
-
-static void	init_mlx_and_image(t_fractal *f)
 {
 	f->mlx = mlx_init();
 	f->win = mlx_new_window(f->mlx, WIDTH, HEIGHT, "Fractol");
 	f->img.ptr = mlx_new_image(f->mlx, WIDTH, HEIGHT);
 	f->img.data = mlx_get_data_addr(f->img.ptr, &f->img.bpp,
-			&f->img.line_len, &f->img.endian);
+		&f->img.line_len, &f->img.endian);
 	f->zoom = 1.0;
 	f->offset_x = 0.0;
 	f->offset_y = 0.0;
@@ -37,6 +30,7 @@ static void	init_mlx_and_image(t_fractal *f)
 	f->julia_c.real = 0.0;
 	f->julia_c.imag = 0.0;
 	f->fractal_type = FRACT_MANDEL;
+	parse_cli_fractal_args(f, ac, av);
 }
 
 static void	parse_cli_fractal_args(t_fractal *f, int ac, char **av)

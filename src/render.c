@@ -39,7 +39,7 @@ void	render_row(t_fractal *f, int y)
 	}
 }
 
-void	render_fractal(t_fractal *f)
+void	draw_fractal(t_fractal *f)
 {
 	int	y;
 
@@ -50,9 +50,4 @@ void	render_fractal(t_fractal *f)
 		y++;
 	}
 	mlx_put_image_to_window(f->mlx, f->win, f->img.ptr, 0, 0);
-}
-
-void	draw_fractal(t_fractal *f)
-{
-	render_fractal(f);
 }
