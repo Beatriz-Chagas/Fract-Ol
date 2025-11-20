@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 06:27:48 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/17 04:55:55 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/19 22:36:43 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define FRACT_MANDEL 0
 # define FRACT_JULIA 1
 # define FRACT_BURNING 2
+# define MAX_ITER 100
 # define MESSAGE "Type: ./fractol [fractal] (mandelbrot/julia/burningship)\n"
 
 typedef struct s_complex

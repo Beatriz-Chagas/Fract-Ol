@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 06:04:01 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/17 06:38:33 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/19 22:36:59 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	init_fractal(t_fractal *f, int ac, char **av)
 	f->win = mlx_new_window(f->mlx, WIDTH, HEIGHT, "Fractol");
 	f->img.ptr = mlx_new_image(f->mlx, WIDTH, HEIGHT);
 	f->img.data = mlx_get_data_addr(f->img.ptr, &f->img.bpp,
-		&f->img.line_len, &f->img.endian);
+			&f->img.line_len, &f->img.endian);
 	f->zoom = 1.0;
 	f->offset_x = 0.0;
 	f->offset_y = 0.0;
-	f->max_iter = 50;
+	f->max_iter = MAX_ITER;
 	f->palette = 0;
 	f->julia_c.real = 0.0;
 	f->julia_c.imag = 0.0;
