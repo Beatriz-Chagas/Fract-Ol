@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 07:00:00 by auto-refact       #+#    #+#             */
-/*   Updated: 2025/11/17 04:58:25 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/20 01:25:01 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,17 @@ int	ft_strcmp(const char *s1, const char *s2)
 		i++;
 	}
 	return (0);
+}
+
+int	ft_putstr(char *s)
+{
+	int	count;
+
+	if (!s)
+		s = "(null)";
+	count = 0;
+	while (s[count])
+		count++;
+	write(1, s, count);
+	return (count);
 }

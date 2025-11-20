@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 06:04:01 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/19 22:36:59 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/19 23:04:38 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	init_fractal(t_fractal *f, int ac, char **av)
 	f->julia_c.real = 0.0;
 	f->julia_c.imag = 0.0;
 	f->fractal_type = FRACT_MANDEL;
+	f->shift_held = 0;
 	parse_cli_fractal_args(f, ac, av);
 }
 

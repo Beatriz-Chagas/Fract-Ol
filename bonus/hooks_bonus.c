@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 03:00:00 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/17 04:55:22 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/19 23:54:36 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	motion_hook(int x, int y, void *param)
 	double		ny;
 
 	f = (t_fractal *)param;
-	if (f->fractal_type != FRACT_JULIA)
+	if ((f->fractal_type != FRACT_JULIA) || (!f->shift_held))
 		return (0);
 	nx = (double)x / (double)WIDTH;
 	ny = (double)y / (double)HEIGHT;
