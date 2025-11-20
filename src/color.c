@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 06:04:23 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/20 01:32:59 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/20 01:39:55 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,18 @@ static int	palette1(double t)
 
 static int	palette2(double t)
 {
+	int	r;
+	int	g;
+	int	b;
+
+	r = (int)(20 * (1 - t));
+	g = (int)(15 * (1 - t) * (1 - t) * t * t * 255);
+	b = (int)(8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255);
+	return ((r << 16) | (g << 8) | b);
+}
+
+static int	palette3(double t)
+{
 	double	tt;
 	int		r;
 	int		g;
@@ -44,40 +56,18 @@ static int	palette2(double t)
 	return ((r << 16) | (g << 8) | b);
 }
 
-static int lerp(int a, int b, double t)
+int	color_map(int i, int max_iter, int palette)
 {
-	int r = ((a >> 16) & 0xFF) * (1 - t) + ((b >> 16) & 0xFF) * t;
-	int g = ((a >> 8) & 0xFF) * (1 - t) + ((b >> 8) & 0xFF) * t;
-	int b2 = (a & 0xFF) * (1 - t) + (b & 0xFF) * t;
-
-	return (r << 16) | (g << 8) | b2;
-}
-int pick_palette(int palette, double t)
-{
-	if (palette == 0)
-		return palette1(t);
-	if (palette == 1)
-		return ((int)(255 * t) << 16 | (int)(255 * t) << 8 | (int)(255 * t));
-	else
-		return palette2(t);
-}
-
-int color_map(t_fractal *f, int i, int max_iter)
-{
-	double t;
-	int c1;
-	int c2;
+	double	t;
 
 	if (i >= max_iter)
 		return (0x000000);
-
 	t = (double)i / (double)max_iter;
-
-	if (!f->is_transitioning)
-		return pick_palette(f->palette, t);
-
-	c1 = pick_palette(f->old_palette, t);
-	c2 = pick_palette(f->target_palette, t);
-
-	return lerp(c1, c2, f->transition_t);
+	if (palette == 0)
+		return (palette1(t));
+	if (palette == 1)
+		return ((int)(255 * t) << 16 | (int)(255 * t) << 8 | (int)(255 * t));
+	if (palette == 2)
+		return (palette2(t));
+	return (palette3(t));
 }

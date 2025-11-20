@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 06:27:48 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/20 01:10:04 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/20 01:40:50 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,6 @@ typedef struct s_fractal
 	int			palette;
 	int			fractal_type;
 	int			shift_held;
-	int			old_palette;
-	int			target_palette;
-	double		transition_t;
-	int			is_transitioning;
 }	t_fractal;
 
 typedef struct s_atof_state
@@ -94,6 +90,7 @@ int		ft_atof_parse_fraction(t_atof_state *st);
 int		ft_atof_parse_number(const char *s, double *out);
 int		ft_atof(const char *s, double *out);
 char	*ft_atof_skip(const char *s, double *sign);
+
 int		ft_putstr(char *s);
 void	arg_message(void);
 // Initialization and Hooks
@@ -102,6 +99,5 @@ int		key_press(int keycode, void *param);
 int		key_release(int keycode, void *param);
 int		close_window(void *param);
 // Color Mapping
-int		 color_map(t_fractal *f, int i, int max_iter);
-
+int		color_map(int i, int max_iter, int palette);
 #endif

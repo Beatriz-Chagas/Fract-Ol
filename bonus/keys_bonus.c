@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 03:05:00 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/20 01:28:48 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/20 01:42:16 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,5 @@ int	key_release(int keycode, void *param)
 	f = (t_fractal *)param;
 	if (keycode == 65505 || keycode == 65506)
 		f->shift_held = 0;
-
-	if (keycode == 32 && f->shift_held)
-	{
-		f->old_palette = f->palette;
-		f->target_palette = (f->palette + 1) % PALETTE_COUNT;
-		f->transition_t = 0.8;
-		f->is_transitioning = 1;
-	}
 	return (0);
 }

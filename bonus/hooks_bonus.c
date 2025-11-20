@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 03:00:00 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/19 23:54:36 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/20 01:52:47 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ int	motion_hook(int x, int y, void *param)
 		return (0);
 	nx = (double)x / (double)WIDTH;
 	ny = (double)y / (double)HEIGHT;
-	nx = (nx - 0.5) * 4.0 * f->zoom + f->offset_x;
-	ny = (ny - 0.5) * 4.0 * f->zoom + f->offset_y;
-	f->julia_c.real = nx;
-	f->julia_c.imag = ny;
+	nx = (nx - 0.5) * 4.0;
+	ny = (ny - 0.5) * 4.0;
+	f->julia_c.real = nx * 0.8;
+	f->julia_c.imag = ny * 0.8;
 	draw_fractal(f);
 	return (0);
 }

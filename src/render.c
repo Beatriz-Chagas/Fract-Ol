@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 06:03:30 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/20 01:23:08 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/20 01:41:48 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	render_row(t_fractal *f, int y)
 			i = iterate_burning(c, f->max_iter);
 		else
 			i = iterate_mandelbrot(c, f->max_iter);
-		pixel_put(&f->img, x, y, color_map(f, i, f->max_iter));
+		pixel_put(&f->img, x, y, color_map(i, f->max_iter, f->palette));
 		x++;
 	}
 }
