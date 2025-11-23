@@ -6,14 +6,14 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 03:10:00 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/17 07:09:31 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/20 05:48:07 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol_bonus.h"
 #include <math.h>
 
-// z = real(z) + i*imag(z) + c 
+// z = (|real(z)| + i|imag(z)|)² + c 
 int	iterate_burning(t_complex c, int max_iter)
 {
 	t_complex	z;
