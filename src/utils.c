@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 07:00:00 by auto-refact       #+#    #+#             */
-/*   Updated: 2025/11/20 01:41:26 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/23 22:02:51 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,6 @@ void	pixel_put(t_img *img, int x, int y, int color)
 double	map(double value, double max_val, double offset)
 {
 	return (offset + (value / max_val - 0.5) * 4.0);
-}
-
-double	map_range(double value, t_range in, t_range out)
-{
-	if (in.max - in.min == 0)
-		return (out.min);
-	return (out.min + (value - in.min) * (out.max - out.min)
-		/ (in.max - in.min));
 }
 
 int	ft_strcmp(const char *s1, const char *s2)
