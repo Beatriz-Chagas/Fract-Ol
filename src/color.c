@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 06:04:23 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/23 22:03:47 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/23 22:04:24 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static int	palette2(double t)
 	int	g;
 	int	b;
 
-	r = (int)(255.0 * (0.8 + 0.2 * t));
+	r = (int)(255.0 * (0.8 + 0.2 * t));int	ft_strcmp(const char *s1, const char *s2)
+
 	g = (int)(255.0 * (0.2 + 0.8 * (t * t)));
 	b = (int)(50.0 * (1.0 - t));
 	if (r > 255)

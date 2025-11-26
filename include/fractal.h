@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 06:27:48 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/11/23 20:29:19 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/11/25 21:38:58 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int		iterate_julia(t_complex z, t_complex c, int max_iter);
 // Utilities
 void	pixel_put(t_img *img, int x, int y, int color);
 double	map(double value, double max_val, double offset);
-double	map_range(double value, t_range in, t_range out);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_atof_parse_integer(t_atof_state *st);
 int		ft_atof_parse_fraction(t_atof_state *st);

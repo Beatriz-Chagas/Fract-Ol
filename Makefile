@@ -6,13 +6,13 @@
 #    By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 06:03:46 by bchagas-          #+#    #+#              #
-#    Updated: 2025/11/19 22:37:47 by bchagas-         ###   ########.fr        #
+#    Updated: 2025/11/25 21:52:05 by bchagas-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Ofast -I include
+CFLAGS = -Wall -Wextra -Werror -Ofast -I include 
 MLXFLAGS = -lmlx -lXext -lX11 -lm
 
 SRC = \
